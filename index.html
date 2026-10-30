@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Madhuri 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fdf0f3;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 16px;
+    overflow-x: hidden;
+  }
+  .petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .petal { position: absolute; animation: floatDown linear infinite; opacity: 0.45; }
+  @keyframes floatDown {
+    0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.5; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+  .card {
+    position: relative; z-index: 1;
+    background: #fff; border-radius: 28px;
+    padding: 40px 28px 34px;
+    width: min(430px, 100%);
+    box-shadow: 0 8px 40px rgba(200,80,100,0.13), 0 2px 8px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+  .step { display: none; animation: cardIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both; }
+  .step.active { display: block; }
+  @keyframes cardIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .big-emoji { font-size: 68px; margin-bottom: 14px; display: block; }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.45rem, 5.5vw, 1.9rem);
+    font-weight: 900; color: #2d1a1e; line-height: 1.25; margin-bottom: 10px;
+  }
+  .subtitle { font-size: 0.9rem; color: #a07080; margin-bottom: 26px; line-height: 1.6; min-height: 1.4em; }
+
+  .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; min-height: 54px; }
+  .btn {
+    padding: 14px 30px; border-radius: 50px; border: none;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+    touch-action: manipulation;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,80,100,0.2); }
+  .btn:active { transform: scale(0.97); }
+  .btn-yes { background: #f4a7b9; color: #5a1a2a; }
+  .btn-no { background: #e8d5f5; color: #5a3a6a; }
+  .btn-no.running {
+    position: fixed; z-index: 50;
+    transition: left 0.28s cubic-bezier(0.34,1.8,0.5,1), top 0.28s cubic-bezier(0.34,1.8,0.5,1);
+  }
+  .btn-primary {
+    background: #f4a7b9; color: #5a1a2a;
+    width: 100%; padding: 15px; border-radius: 14px; margin-top: 8px;
+  }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .food-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 22px; }
+  .food-item {
+    background: #fdf0f3; border-radius: 14px; padding: 14px 6px 10px;
+    cursor: pointer; border: 2px solid transparent;
+    font-size: 0.78rem; font-weight: 600; color: #5a1a2a; transition: all 0.18s;
+  }
+  .food-item .fe { font-size: 1.7rem; display: block; margin-bottom: 5px; }
+  .food-item:hover { background: #fce4ec; border-color: #f4a7b9; }
+  .food-item.selected { background: #f4a7b9; border-color: #e57a96; }
+
+  .field-group { margin-bottom: 14px; text-align: left; }
+  .field-label { font-size: 0.82rem; font-weight: 600; color: #a07080; margin-bottom: 5px; }
+  input[type="date"], input[type="text"], select, textarea {
+    width: 100%; padding: 12px 14px; border-radius: 12px;
+    border: 1.5px solid #f0d0da; background: #fdf5f7;
+    font-family: 'DM Sans', sans-serif; font-size: 16px; color: #2d1a1e;
+    outline: none; transition: border-color 0.2s;
+    appearance: none; -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: #f4a7b9; }
+  textarea { resize: none; height: 72px; line-height: 1.5; }
+
+  .summary-box {
+    background: #fdf0f3; border-radius: 16px; padding: 18px 16px;
+    margin: 18px 0 18px; text-align: left; font-size: 0.9rem;
+    color: #5a1a2a; line-height: 2;
+  }
+  .summary-box span { font-weight: 700; }
+  .screenshot-box {
+    background: #fff4d6; border: 2px dashed #f0c25a; border-radius: 16px;
+    padding: 14px 16px; font-size: 0.95rem; font-weight: 600; color: #6b4a00;
+    line-height: 1.5; animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+
+  .confetti-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 999; overflow: hidden; }
+  .confetto { position: absolute; animation: confettiFall 1.6s ease-in forwards; }
+  @keyframes confettiFall {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+  .footer { position: relative; z-index: 1; text-align: center; font-size: 0.72rem; color: #c9919f; margin-top: 18px; }
+  .hearts { font-size: 1.5rem; letter-spacing: 6px; margin-top: 18px; }
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals"></div>
+
+<div class="card">
+
+  <!-- STEP 1 -->
+  <div class="step active" id="step1">
+    <span class="big-emoji">🚗💕</span>
+    <h1>Madhuri, can I pick you up from your house?</h1>
+    <p class="subtitle" id="ask-sub">I'll be on time. I'll even open the door 😌</p>
+    <div class="btn-row" id="btn-row">
+      <button class="btn btn-yes" onclick="goStep(2)">YES 💕</button>
+      <button class="btn btn-no" id="btn-no">no... 🙈</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="step2">
+    <span class="big-emoji">🎉</span>
+    <h1 id="step2-title">SHE SAID YES 😭✨</h1>
+    <p class="subtitle" id="step2-sub">okay okay Shubh, breathe. now let's plan this properly 😏</p>
+    <button class="btn btn-primary" onclick="goStep(3)">let's plan it →</button>
+  </div>
+
+  <!-- STEP 3: Date & time -->
+  <div class="step" id="step3">
+    <span style="font-size:46px;display:block;margin-bottom:12px;">📅✨</span>
+    <h1>So... when are you free?</h1>
+    <p class="subtitle">I'll clear my schedule. no cap.</p>
+    <div class="field-group">
+      <div class="field-label">Pick a day 🌸</div>
+      <input type="date" id="date-pick" />
+    </div>
+    <div class="field-group">
+      <div class="field-label">What time? 🕐</div>
+      <select id="time-pick">
+        <option value="">Select a time...</option>
+        <option>9:00 AM — rise and shine 🌅</option>
+        <option>10:00 AM — morning vibes ☕</option>
+        <option>11:00 AM — brunch szn 🥞</option>
+        <option>12:00 PM — lunch date 🍱</option>
+        <option>1:00 PM — post-lunch chill 😌</option>
+        <option>2:00 PM — afternoon delight ✨</option>
+        <option>3:00 PM — snack o'clock 🍿</option>
+        <option>4:00 PM — golden hour 🌤️</option>
+        <option>5:00 PM — early bird 🐦</option>
+        <option>6:00 PM — perfect tbh 💕</option>
+        <option>7:00 PM — dinner o'clock 🍽️</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" id="step3-next" onclick="goStep(4)" disabled>next →</button>
+  </div>
+
+  <!-- STEP 4: Food -->
+  <div class="step" id="step4">
+    <h1>What are we feeling? 🍽️✨</h1>
+    <p class="subtitle">pick your vibe for the night</p>
+    <div class="food-grid">
+      <div class="food-item" onclick="selectFood(this,'Indian 🇮🇳')"><span class="fe">🍛</span>Indian</div>
+      <div class="food-item" onclick="selectFood(this,'Biryani 🍚')"><span class="fe">🍚</span>Biryani</div>
+      <div class="food-item" onclick="selectFood(this,'Sushi 🍱')"><span class="fe">🍱</span>Sushi</div>
+      <div class="food-item" onclick="selectFood(this,'Pizza 🍕')"><span class="fe">🍕</span>Pizza</div>
+      <div class="food-item" onclick="selectFood(this,'Pasta 🍝')"><span class="fe">🍝</span>Pasta</div>
+      <div class="food-item" onclick="selectFood(this,'Tacos 🌮')"><span class="fe">🌮</span>Tacos</div>
+      <div class="food-item" onclick="selectFood(this,'Ramen 🍜')"><span class="fe">🍜</span>Ramen</div>
+      <div class="food-item" onclick="selectFood(this,'Burgers 🍔')"><span class="fe">🍔</span>Burgers</div>
+      <div class="food-item" onclick="selectFood(this,'Surprise me! 🎲')"><span class="fe">🎲</span>Surprise!</div>
+    </div>
+    <button class="btn btn-primary" id="food-next" onclick="goStep(5)" style="display:none">yes, that! →</button>
+  </div>
+
+  <!-- STEP 5: Restaurant + pickup -->
+  <div class="step" id="step5">
+    <span style="font-size:46px;display:block;margin-bottom:12px;">🏪📍</span>
+    <h1>Any restaurant in mind?</h1>
+    <p class="subtitle">drop your fave spot, or I'll pick one 😎</p>
+    <div class="field-group">
+      <div class="field-label">Restaurant suggestion 🍽️</div>
+      <input type="text" id="restaurant" placeholder="e.g. your favorite spot..." />
+    </div>
+    <div class="field-group">
+      <div class="field-label">Pickup address 🏠</div>
+      <input type="text" id="address" placeholder="where's my pickup point?" />
+    </div>
+    <div class="field-group">
+      <div class="field-label">Anything else I should know? ✨</div>
+      <textarea id="notes" placeholder="allergies, dress code, vibes..."></textarea>
+    </div>
+    <button class="btn btn-primary" id="step5-next" onclick="goStep(6)" disabled>it's a date! 💕</button>
+  </div>
+
+  <!-- STEP 6: Final -->
+  <div class="step" id="step6">
+    <span class="big-emoji">💌</span>
+    <h1>glad you didn't say no, Madhuri.</h1>
+    <div class="summary-box" id="summary-box"></div>
+    <div class="screenshot-box">📸 Screenshot this page and send it to Shubh so he knows the plan!</div>
+    <p style="margin-top:16px;font-size:0.8rem;color:#c09090;font-style:italic;">
+      Tari mate aa website banavi!! For my to be wifey!!<br>
+      DODH DAAYI BAV HASIS NAI
+    </p>
+    <div class="hearts">💗 💕 💗</div>
+  </div>
+
+</div>
+<div class="footer">made with 💕 by Shubh, just for Madhuri</div>
+<div class="confetti-wrap" id="confetti"></div>
+
+<script>
+  // Petals
+  const em = ['🌸','💕','✨','🌺','💮','🌼'];
+  const pe = document.getElementById('petals');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('span');
+    p.className = 'petal';
+    p.textContent = em[Math.floor(Math.random() * em.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (7 + Math.random() * 9) + 's';
+    p.style.animationDelay = (Math.random() * 9) + 's';
+    p.style.fontSize = (0.75 + Math.random() * 0.9) + 'rem';
+    pe.appendChild(p);
+  }
+
+  function goStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    document.getElementById('btn-no').style.display = 'none';
+    window.scrollTo(0, 0);
+    if (n === 2 || n === 6) launchConfetti();
+    if (n === 6) buildSummary();
+  }
+
+  // Bouncing NO button (works for mouse AND touch)
+  const noBtn = document.getElementById('btn-no');
+  const sub = document.getElementById('ask-sub');
+  const taunts = [
+    "nice try 😏", "the button said no to saying no 😭", "too slow!",
+    "you can't catch it 🏃‍♀️", "just say yes already 🥺", "it's not gonna happen 😂",
+    "I believe in you. click YES 💕", "wrong button, babe 😌"
+  ];
+  const MAX_BOUNCES = 5;   // the NO button dodges this many times, then gives up
+  let bounces = 0;
+  let lastBounce = 0;
+  function bounce(e) {
+    if (bounces >= MAX_BOUNCES) return;          // caught! let the normal click happen
+    e.preventDefault();
+    e.stopPropagation();
+    const now = Date.now();
+    if (now - lastBounce < 350) return;          // one touch = one dodge (not several)
+    lastBounce = now;
+    bounces++;
+    noBtn.classList.add('running');
+    const w = noBtn.offsetWidth, h = noBtn.offsetHeight, pad = 12;
+    const maxX = window.innerWidth - w - pad;
+    const maxY = window.innerHeight - h - pad;
+    noBtn.style.left = (pad + Math.random() * Math.max(maxX - pad, 0)) + 'px';
+    noBtn.style.top = (pad + Math.random() * Math.max(maxY - pad, 0)) + 'px';
+    sub.textContent = bounces < MAX_BOUNCES
+      ? taunts[(bounces - 1) % taunts.length]
+      : "okay okay... you caught me 😅 last chance to say YES";
+  }
+  ['pointerenter', 'touchstart', 'mousedown', 'click'].forEach(ev =>
+    noBtn.addEventListener(ev, bounce, { passive: false })
+  );
+  // After 5 dodges the button stays put; if she still taps it, we pretend it said yes
+  noBtn.addEventListener('click', () => {
+    if (bounces >= MAX_BOUNCES) {
+      document.getElementById('step2-title').textContent = "NICE TRY 😏 I'M PICKING YOU UP ANYWAY 🚗";
+      document.getElementById('step2-sub').textContent = "you tapped no... but I heard yes 😌 let's plan it";
+      goStep(2);
+    }
+  });
+
+  // Step 3
+  const dateInput = document.getElementById('date-pick');
+  const timeInput = document.getElementById('time-pick');
+  dateInput.min = new Date().toISOString().split('T')[0];
+  function check3() { document.getElementById('step3-next').disabled = !(dateInput.value && timeInput.value); }
+  dateInput.addEventListener('change', check3);
+  timeInput.addEventListener('change', check3);
+
+  // Step 4
+  let food = '';
+  function selectFood(el, name) {
+    document.querySelectorAll('.food-item').forEach(f => f.classList.remove('selected'));
+    el.classList.add('selected');
+    food = name;
+    document.getElementById('food-next').style.display = 'block';
+  }
+
+  // Step 5
+  const addr = document.getElementById('address');
+  function check5() { document.getElementById('step5-next').disabled = !addr.value.trim(); }
+  addr.addEventListener('input', check5);
+
+  function esc(s) { return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function buildSummary() {
+    const d = new Date(dateInput.value + 'T12:00:00')
+      .toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    const r = document.getElementById('restaurant').value.trim();
+    const n = document.getElementById('notes').value.trim();
+    document.getElementById('summary-box').innerHTML =
+      `🚗 <span>Pickup:</span> ${esc(addr.value.trim())}<br>` +
+      `📅 <span>Date:</span> ${d}<br>` +
+      `🕐 <span>Time:</span> ${esc(timeInput.value.split(' — ')[0])}<br>` +
+      `🍽️ <span>Craving:</span> ${esc(food)}<br>` +
+      (r ? `🏪 <span>Restaurant:</span> ${esc(r)}<br>` : '') +
+      (n ? `✨ <span>Notes:</span> ${esc(n)}` : '');
+  }
+
+  function launchConfetti() {
+    const colors = ['#f4a7b9','#e8d5f5','#ffd6e0','#c8f7c5','#ffeaa7','#ff6b9d','#b5ead7'];
+    const wrap = document.getElementById('confetti');
+    wrap.innerHTML = '';
+    for (let i = 0; i < 70; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetto';
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.top = '-10px';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.animationDelay = (Math.random() * 0.9) + 's';
+      c.style.animationDuration = (1.2 + Math.random() * 1.2) + 's';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
+      const s = (6 + Math.random() * 7) + 'px';
+      c.style.width = c.style.height = s;
+      wrap.appendChild(c);
+    }
+    setTimeout(() => wrap.innerHTML = '', 3500);
+  }
+</script>
+</body>
+</html>
